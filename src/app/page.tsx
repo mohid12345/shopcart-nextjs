@@ -44,8 +44,8 @@ function Page() {
     };
 
     const removeQuantity = (id: number, quantity: number) => {
-      console.log('remove', id, quantity);
-      
+        console.log("remove", id, quantity);
+
         setCart((prevCart) =>
             prevCart.map((item) => (item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item))
         );
@@ -112,50 +112,67 @@ function Page() {
                                 <hr />
 
                                 <div className="bg-blue-200 rounded-lg h-[4rem] mt-2 p-3">
-                                { totalAmount >= freeGiftThreshold ?"You earned a free gift" : `Add ${1000 - totalAmount} more to get a free wireless mouse`}
+                                    {totalAmount >= freeGiftThreshold
+                                        ? "You earned a free gift"
+                                        : `Add ${1000 - totalAmount} more to get a free wireless mouse`}
                                 </div>
-                                <div style={{height: '10px', width: "100%", background: "yellow", marginTop: "10px"}}>
-                                  <div style={{height: "10px", width: `${progress}%`, background: "green"}}></div>
+                                <div style={{ height: "10px", width: "100%", background: "yellow", marginTop: "10px" }}>
+                                    <div style={{ height: "10px", width: `${progress}%`, background: "green" }}></div>
                                 </div>
                             </div>
                         </div>
                         <div className="px-10 p-2 ">
-                          {cart.length === 0 ? (
-                            <div className="bg-white rounded-lg p-3">
-                                <div>
-                                    <div className="flex flex-col justify-center items-center">
-                                        <div>Your cart is empty</div>
-                                        <div className="text-slate-500 text-sm">add some products to see them here!</div>
+                            {cart.length === 0 ? (
+                                <div className="bg-white rounded-lg p-3">
+                                    <div>
+                                        <div className="flex flex-col justify-center items-center">
+                                            <div>Your cart is empty</div>
+                                            <div className="text-slate-500 text-sm">
+                                                add some products to see them here!
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            ): ( 
-                            cart.map((item) => (
-                            <div className="bg-white rounded-lg p-3">
-                              <div>
-                                  <div className="flex justify-between">
-                                      <div className="flex flex-col">
-                                        <div>{item.name}</div>
-                                        <div className="text-sm text-slate-500">${item.price}*{item.quantity} = ${item.price * item.quantity}</div>
-                                      </div>
-                                      {item.id !== freeGift.id ? 
-                                      <div className="">
-                                        {/* remove */}
-                                     <button onClick={(e) =>  removeQuantity(item.id, item.quantity-1)} className="p-3 bg-red-500">-</button>
-                                     {item.quantity}
-                                     {/* add */}
-                                     <button onClick={(e) => addQuantity(item.id,item.quantity+1)} className="p-3 bg-green-500">+</button>
-                                     <button onClick={() => removeItem(item.id)} className="p-3">Remove</button>
-
-                                      </div>
-                                     : 
-                                     <div>Offer item</div>
-                                      }
-                                  </div>
-                              </div>
-                          </div>
-                        ))
-                        )}
+                            ) : (
+                                cart.map((item) => (
+                                    <div key={item.id} className="bg-white rounded-lg p-3">
+                                        <div>
+                                            <div className="flex justify-between">
+                                                <div className="flex flex-col">
+                                                    <div>{item.name}</div>
+                                                    <div className="text-sm text-slate-500">
+                                                        ${item.price}*{item.quantity} = ${item.price * item.quantity}
+                                                    </div>
+                                                </div>
+                                                {item.id !== freeGift.id ? (
+                                                    <div className="">
+                                                        {/* remove */}
+                                                        <button
+                                                            onClick={(e) => removeQuantity(item.id, item.quantity - 1)}
+                                                            className="p-3 bg-red-500"
+                                                        >
+                                                            -
+                                                        </button>
+                                                        {item.quantity}
+                                                        {/* add */}
+                                                        <button
+                                                            onClick={(e) => addQuantity(item.id, item.quantity + 1)}
+                                                            className="p-3 bg-green-500"
+                                                        >
+                                                            +
+                                                        </button>
+                                                        <button onClick={() => removeItem(item.id)} className="p-3">
+                                                            Remove
+                                                        </button>
+                                                    </div>
+                                                ) : (
+                                                    <div>Offer item</div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            )}
                         </div>
                     </div>
                 </div>
