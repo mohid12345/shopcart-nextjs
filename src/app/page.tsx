@@ -148,7 +148,7 @@ function Page() {
                                                     <div className="">
                                                         {/* remove */}
                                                         <button
-                                                            onClick={(e) => removeQuantity(item.id, item.quantity - 1)}
+                                                            onClick={() => removeQuantity(item.id, item.quantity - 1)}
                                                             className="p-3 bg-red-500"
                                                         >
                                                             -
@@ -156,7 +156,7 @@ function Page() {
                                                         {item.quantity}
                                                         {/* add */}
                                                         <button
-                                                            onClick={(e) => addQuantity(item.id, item.quantity + 1)}
+                                                            onClick={() => addQuantity(item.id, item.quantity + 1)}
                                                             className="p-3 bg-green-500"
                                                         >
                                                             +
