@@ -11,7 +11,7 @@ interface CartItem extends Product {
     quantity: number;
 }
 
-function page() {
+function Page() {
     const [products, setProducts] = useState<Product[]>([
         { id: 1, name: "Laptop", price: 500 },
         { id: 2, name: "Smartphone", price: 300 },
@@ -164,4 +164,4 @@ function page() {
     );
 }
 
-export default page;
+export default Page;
