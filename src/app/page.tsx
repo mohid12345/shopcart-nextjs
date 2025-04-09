@@ -12,7 +12,7 @@ interface CartItem extends Product {
 }
 
 function Page() {
-    const [products, setProducts] = useState<Product[]>([
+    const [products] = useState<Product[]>([
         { id: 1, name: "Laptop", price: 500 },
         { id: 2, name: "Smartphone", price: 300 },
         { id: 3, name: "Headphones", price: 100 },
@@ -71,7 +71,7 @@ function Page() {
         } else {
             setCart((prevCart) => prevCart.filter((item) => item.id !== freeGift.id));
         }
-    }, [totalAmount]);
+    }, [totalAmount,freeGift]);
 
     return (
         <div className="flex justify-center">
