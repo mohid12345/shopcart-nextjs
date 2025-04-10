@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState ,useMemo } from "react";
 
 interface Product {
     id: number;
@@ -21,7 +21,7 @@ function Page() {
 
     const [cart, setCart] = useState<CartItem[]>([]);
     const freeGiftThreshold = 1000;
-    const freeGift = { id: 99, name: "Wireless Mouse", price: 0 };
+    const freeGift = useMemo(() => ({ id: 99, name: "Wireless Mouse", price: 0 }), []);
 
     useEffect(() => {
         console.log("Cart updates", cart);
@@ -135,8 +135,8 @@ function Page() {
                                 </div>
                             ) : (
                                 cart.map((item) => (
-                                    <div className="my-3">
-                                        <div key={item.id} className="bg-white rounded-lg p-3 ">
+                                    <div key={item.id} className="my-3">
+                                        <div  className="bg-white rounded-lg p-3 ">
                                             <div>
                                                 <div className="flex justify-between">
                                                     <div className="flex flex-col ">
@@ -146,7 +146,7 @@ function Page() {
                                                         </div>
                                                     </div>
                                                     {item.id !== freeGift.id ? (
-                                                        <div className="flex justify-center items-center gap-x-1">
+                                                        <div key={item.id} className="flex justify-center items-center gap-x-1">
                                                             {/* remove */}
                                                             <button
                                                                 onClick={() => removeQuantity(item.id, item.quantity - 1)}
